@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
+import DisplayPhoto from './uploadedPics';
 
-function UploadPhoto() {
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
-
-  const handleUpload = () => {
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const imageUrl = event.target.result;
-        localStorage.setItem('uploadedPhoto', imageUrl);
-      };
-      reader.readAsDataURL(selectedFile);
+function ImageUpload() {
+  const [imageSrc, setImageSrc] = useState('');
+  
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+      const imageDataUrl = reader.result;
+      setImageSrc(imageDataUrl);
+      
+      // Save image to local storage
+      localStorage.setItem('uploadedImage', imageDataUrl);
+    };
+    
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
-
+  
   return (
     <div>
-      <h2>Upload Photo</h2>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <h1>Image Upload</h1>
+      <input type="file" accept="image/*" onChange={handleImageChange} />
+      {imageSrc && <DisplayPhoto imageDataUrl={imageSrc} />}
     </div>
   );
 }
 
-export default UploadPhoto;
+export default ImageUpload;

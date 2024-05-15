@@ -1,16 +1,10 @@
 import React from 'react';
 
-function DisplayPhoto() {
-  const uploadedPhotoUrl = localStorage.getItem('uploadedPhoto');
-
+function DisplayPhoto({ imageDataUrl }) {
   return (
     <div>
-      <h2>Uploaded Photo</h2>
-      {uploadedPhotoUrl ? (
-        <img src={uploadedPhotoUrl} alt="Uploaded" style={{ maxWidth: '100%' }} />
-      ) : (
-        <p>No photo uploaded</p>
-      )}
+      <h2>Uploaded Image</h2>
+      <img src={imageDataUrl} alt="Uploaded" style={{ maxWidth: '300px', maxHeight: '300px' }} />
     </div>
   );
 }
