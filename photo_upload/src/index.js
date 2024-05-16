@@ -3,27 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Pic_upload from './picUpload';
-import UploadPics from './uploadedPics';
 
-export default function Router(){
-  return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Pic_upload/> }>
-        <Route path='/UploadedPic'  element={<UploadPics/>}></Route>
-      </Route>
-    </Routes>
-    </BrowserRouter>
-  );
-}
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router />
+    <App/>
   </React.StrictMode>
 );
 
